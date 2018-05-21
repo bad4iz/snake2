@@ -4,32 +4,35 @@
   </v-container>
 </template>
 <script>
-// eslint-disable-next-line max-len
-  /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var */
+  // eslint-disable-next-line max-len
+  /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case */
 
   export default {
     mounted() {
       /**
        * Created by bad4iz on 14.03.2017.
        */
-      const POINT = 20;
+      const POINT = 20,
+        FIELD_WIDTH = Math.floor(document.documentElement.clientWidth / POINT),
+        FIELD_HEIGHT = Math.floor(document.documentElement.clientHeight / POINT);
+
 
       const conf = {
         POINT, // in pix
-        FIELD_WIDTH: Math.floor(document.documentElement.clientWidth / POINT), // in point
-        FIELD_HEIGHT: Math.floor(document.documentElement.clientHeight / POINT), // in point
+        FIELD_WIDTH,
+        FIELD_HEIGHT,
 
         LEFT: 37,
         UP: 38,
         RIGHT: 39,
         DOWN: 40,
-        START_DIRECTION: 39,
+        START_DIRECTION: this.randomDirection(),
 
         DEFAULT_COLOR: '#222',
         FOOD_COLOR: '#090',
         POISON_COLOR: '#900',
-        START_SNAKE_X: 10,
-        START_SNAKE_Y: 10,
+        START_SNAKE_X: this.round(POINT, FIELD_WIDTH),
+        START_SNAKE_Y: this.round(POINT, FIELD_HEIGHT),
         START_SNAKE_SIZE: 6,
         GAME_OVER: false,
         SHOW_DELAY: 100,
@@ -37,6 +40,8 @@
           return Math.round(Math.random() * max);
         },
       };
+      console.log(conf.START_SNAKE_X);
+      console.log(conf.START_SNAKE_Y);
 
       /**
        * холст
@@ -326,6 +331,26 @@
       // запуск
       const snake = new GameSnake();
       snake.go();
+    },
+    methods: {
+      round(point, maxPoint) {
+        const round = Math.random();
+        const maxRound = Math.floor(round * maxPoint * point);
+        return (maxRound - (maxRound % point));
+      },
+      randomDirection() {
+        const ran = Math.floor(Math.random() * 4);
+        switch (ran) {
+          case 0:
+            return 37;
+          case 1:
+            return 38;
+          case 2:
+            return 39;
+          case 3:
+            return 40;
+        }
+      },
     },
   };
 </script>
