@@ -5,7 +5,7 @@
 </template>
 <script>
   // eslint-disable-next-line max-len
-  /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case */
+  /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case,space-infix-ops */
 
   export default {
     mounted() {
@@ -14,7 +14,8 @@
        */
       const POINT = 60,
         FIELD_WIDTH = Math.floor(document.documentElement.clientWidth / POINT),
-        FIELD_HEIGHT = Math.floor(document.documentElement.clientHeight / POINT);
+        FIELD_HEIGHT = Math.floor(document.documentElement.clientHeight / POINT),
+        START_DIRECTION = this.randomDirection();
 
 
       const conf = {
@@ -26,7 +27,7 @@
         UP: 38,
         RIGHT: 39,
         DOWN: 40,
-        START_DIRECTION: this.randomDirection(),
+        START_DIRECTION,
 
         DEFAULT_COLOR: '#222',
         FOOD_COLOR: '#090',
@@ -41,8 +42,8 @@
           return Math.round(Math.random() * max);
         },
       };
+
       console.log(conf.START_SNAKE_X);
-      console.log(conf.START_SNAKE_Y);
 
       /**
        * холст
@@ -336,9 +337,8 @@
     methods: {
       round(point, maxPoint) {
         const round = Math.random();
-        const maxRound = Math.floor(round * maxPoint * 10);
-        debugger;
-        return (maxRound - (maxRound % point));
+        const maxRound = Math.floor(round * maxPoint);
+        return maxRound;
       },
       randomDirection() {
         const ran = Math.floor(Math.random() * 4);
