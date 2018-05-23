@@ -43,8 +43,6 @@
         },
       };
 
-      console.log(conf.START_SNAKE_X);
-
       /**
        * холст
        */
