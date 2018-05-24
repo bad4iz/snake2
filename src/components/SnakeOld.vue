@@ -12,20 +12,10 @@
       /**
        * Created by bad4iz on 14.03.2017.
        */
-      const POINT = 100,
+      const POINT = 60,
         FIELD_WIDTH = Math.floor(document.documentElement.clientWidth / POINT),
         FIELD_HEIGHT = Math.floor(document.documentElement.clientHeight / POINT),
-        START_DIRECTION = this.randomDirection(),
-        DEFAULT_COLOR = '#222',
-        FOOD_COLOR = '#090',
-        POISON_COLOR = '#900',
-        START_SNAKE_X = this.round(POINT, FIELD_WIDTH),
-        START_SNAKE_Y = this.round(POINT, FIELD_HEIGHT),
-        LEFT = 37,
-        UP = 38,
-        RIGHT = 39,
-        DOWN = 40,
-        GAME_OVER = false;
+        START_DIRECTION = this.randomDirection();
 
 
       const conf = {
@@ -33,12 +23,24 @@
         FIELD_WIDTH,
         FIELD_HEIGHT,
 
+        LEFT: 37,
+        UP: 38,
+        RIGHT: 39,
+        DOWN: 40,
         START_DIRECTION,
 
+        DEFAULT_COLOR: '#222',
+        FOOD_COLOR: '#090',
+        POISON_COLOR: '#900',
+        START_SNAKE_X: this.round(POINT, FIELD_WIDTH),
         // START_SNAKE_X: 20,
+        START_SNAKE_Y: this.round(POINT, FIELD_HEIGHT),
         START_SNAKE_SIZE: 6,
+        GAME_OVER: false,
         SHOW_DELAY: 100,
-
+        getRandom(max) {
+          return Math.round(Math.random() * max);
+        },
       };
 
       /**
@@ -331,9 +333,6 @@
       snake.go();
     },
     methods: {
-      getRandom(max) {
-        return Math.round(Math.random() * max);
-      },
       round(point, maxPoint) {
         const round = Math.random();
         const maxRound = Math.floor(round * maxPoint);
