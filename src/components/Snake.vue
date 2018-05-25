@@ -9,6 +9,7 @@
   import direction from '../class/Direction';
   import Mouse from '../class/Mouse';
   import Canvas from '../class/Canvas';
+  import Point from '../class/Point';
 
   export default {
     created() {
@@ -21,10 +22,9 @@
         const canvas = new Canvas();
         const control = new Mouse(canvas.canvasElement);
         const direct = direction(control);
-
         function move() {
-          console.log(control.direction);
-
+          const point = new Point(control.x, control.y, canvas.context);
+          point.paint();
           window.requestAnimationFrame(move);
         }
 

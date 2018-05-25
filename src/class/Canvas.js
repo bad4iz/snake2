@@ -17,7 +17,7 @@ export default class Canvas {
     this.canvasElement.style.left = '0';
   }
 
-  context(context) {
-    return this.canvasElement.getContext(context);
+  get context() {
+    return this.canvasElement.getContext('2d');
   }
 }
