@@ -6,16 +6,31 @@
 <script>
   // eslint-disable-next-line max-len
   /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case,space-infix-ops,no-unused-vars,no-new */
-  import Direction from '../class/Direction';
+  import direction from '../class/Direction';
+  import Mouse from '../class/Mouse';
+  import Canvas from '../class/Canvas';
 
   export default {
-    mounted() {
-      /**
-       * Created by bad4iz on 14.03.2017.
-       */
+    created() {
       const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
       window.requestAnimationFrame = requestAnimationFrame;
+    },
+    mounted() {
+      document.addEventListener('DOMContentLoaded', () => {
+        const canvas = new Canvas();
+        const control = new Mouse(canvas.canvasElement);
+        const direct = direction(control);
+
+        function move() {
+          console.log(control.direction);
+
+          window.requestAnimationFrame(move);
+        }
+
+        move();
+      });
+
 
       const POINT = 100,
         FIELD_WIDTH = Math.floor(document.documentElement.clientWidth / POINT),
@@ -44,22 +59,22 @@
       /**
        * холст
        */
-      class Canvas {
-        constructor() {
-          this.canvasElement = document.createElement('canvas');
-          this.canvasElement.id = 'snake_canvas';
-          document.body.querySelector('#snake').appendChild(this.canvasElement);
-          this.canvasElement.width = conf.FIELD_WIDTH * conf.POINT;
-          this.canvasElement.height = conf.FIELD_HEIGHT * conf.POINT;
-          this.canvasElement.style.position = 'fixed';
-          this.canvasElement.style.top = '0';
-          this.canvasElement.style.left = '0';
-        }
-
-        context(context) {
-          return this.canvasElement.getContext(context);
-        }
-      }
+      // class Canvas {
+      //   constructor() {
+      //     this.canvasElement = document.createElement('canvas');
+      //     this.canvasElement.id = 'snake_canvas';
+      //     document.body.querySelector('#snake').appendChild(this.canvasElement);
+      //     this.canvasElement.width = conf.FIELD_WIDTH * conf.POINT;
+      //     this.canvasElement.height = conf.FIELD_HEIGHT * conf.POINT;
+      //     this.canvasElement.style.position = 'fixed';
+      //     this.canvasElement.style.top = '0';
+      //     this.canvasElement.style.left = '0';
+      //   }
+      //
+      //   context(context) {
+      //     return this.canvasElement.getContext(context);
+      //   }
+      // }
 
       /**
        * игра
@@ -72,6 +87,7 @@
             console.log(event.keyCode);
           });
         }
+
         static go() {
           setInterval(() => {
             if (conf.GAME_OVER) {
@@ -107,7 +123,6 @@
         });
       }
     },
-    methods: {
-    },
+    methods: {},
   };
 </script>

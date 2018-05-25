@@ -6,6 +6,7 @@ export default class {
     this.DEFAULT_COLOR = '#222';
     this.FOOD_COLOR = '#090';
     this.POISON_COLOR = '#900';
+    this.CONTROL_SENSITIVITY = 20; // чуствительность управления
     this.directions = [
       'UP',
       'RIGHT',

@@ -9,8 +9,8 @@ export default class {
     this.direction = conf.directions[2];
 
     canvas.addEventListener('mousemove', (event) => {
-      const deltaX = event.clientX - this.x;
-      const deltaY = this.y - event.clientY;
+      const deltaX = Math.round((event.clientX - this.x) / conf.CONTROL_SENSITIVITY);
+      const deltaY = Math.round((this.y - event.clientY) / conf.CONTROL_SENSITIVITY);
       if (Math.abs(deltaX) >= Math.abs(deltaY)) {
         if (deltaX > 0) {
           this.direction = conf.directions[1];
