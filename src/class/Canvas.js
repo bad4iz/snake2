@@ -1,7 +1,11 @@
+import Conf from './conf';
 /**
  * холст
  */
- export default class Canvas {
+const conf = new Conf();
+
+
+export default class Canvas {
   constructor() {
     this.canvasElement = document.createElement('canvas');
     this.canvasElement.id = 'snake_canvas';
