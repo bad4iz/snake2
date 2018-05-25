@@ -6,6 +6,7 @@
 <script>
   // eslint-disable-next-line max-len
   /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case,space-infix-ops,no-unused-vars,no-new */
+  import Direction from '../class/Direction';
 
   export default {
     mounted() {
@@ -103,7 +104,6 @@
           if (PLAY) {
             requestAnimationFrame(animate);
           }
-
         });
       }
     },
