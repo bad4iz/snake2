@@ -10,6 +10,7 @@
   import Mouse from '../class/Mouse';
   import Canvas from '../class/Canvas';
   import Point from '../class/Point';
+  import Snake from '../class/Snake';
 
   export default {
     created() {
@@ -22,9 +23,12 @@
         const canvas = new Canvas();
         const control = new Mouse(canvas.canvasElement);
         const direct = direction(control);
+
+        const snake = new Snake(canvas.context);
+        snake.paint();
+
+
         function move() {
-          const point = new Point(control.x, control.y, canvas.context);
-          point.paint();
           window.requestAnimationFrame(move);
         }
 
@@ -50,7 +54,7 @@
         FIELD_WIDTH,
         FIELD_HEIGHT,
 
-        // START_SNAKE_X: 20,
+        START_SNAKE_X: 20,
         START_SNAKE_SIZE: 6,
         SHOW_DELAY: 100,
 

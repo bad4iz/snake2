@@ -7,6 +7,9 @@ export default class {
     this.FOOD_COLOR = '#090';
     this.POISON_COLOR = '#900';
     this.CONTROL_SENSITIVITY = 20; // чуствительность управления
+    this.START_SNAKE_SIZE = 6;
+    this.START_SNAKE_X = 3 * this.POINT;
+    this.START_SNAKE_Y = 2 * this.POINT;
     this.directions = [
       'UP',
       'RIGHT',
