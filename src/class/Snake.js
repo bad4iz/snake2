@@ -10,6 +10,8 @@ export default class {
     const x = conf.START_SNAKE_X;
     const y = conf.START_SNAKE_Y;
     this.length = conf.START_SNAKE_SIZE;
+    this.width = conf.FIELD_WIDTH * conf.POINT;
+    this.length = conf.START_SNAKE_SIZE;
     this.snake = [];
     this.direction = conf.START_DIRECTION;
     this.graphics = {};
@@ -43,12 +45,16 @@ export default class {
     // todo: проверка на еду
     this.snake.unshift(new Point(x, y, this.ctx));
     this.snake.pop();
-    console.log(this.snake);
     this.paint();
   }
 
   getDirection(x1, y1) {
-    const x = x1 + conf.POINT;
+    let x;
+    if (x1 > this.width) {
+      x = 0;
+    } else {
+      x = x1 + conf.POINT;
+    }
     const y = y1 + 0;
     return [x, y];
   }

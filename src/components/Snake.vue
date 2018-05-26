@@ -30,10 +30,14 @@
         const snake = new Snake(canvas.context);
         snake.paint();
 
+        let i = 1;
         function move() {
           window.requestAnimationFrame(move);
-          canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
-          snake.move();
+          if (!(i % 10)) {
+            canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
+            snake.move();
+          }
+          i +=1;
         }
 
         move();
