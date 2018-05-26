@@ -1,7 +1,8 @@
-/* eslint-disable one-var,class-methods-use-this,default-case */
+/* eslint-disable one-var,class-methods-use-this,default-case,no-unused-vars */
 import Point from './Point';
 import Conf from './conf';
 import Mouse from './Mouse';
+import Swipe from './Swipe';
 
 const conf = new Conf();
 
@@ -18,7 +19,7 @@ export default class {
     this.direction = conf.START_DIRECTION;
     this.graphics = {};
     this.ctx = canvas.context;
-    this.control = new Mouse(canvas.canvasElement);
+    this.control = new Swipe(canvas.canvasElement);
     // инициализация тела змеи
     for (i = 0; i < this.length; i += 1) {
       const point = new Point((x - i) * conf.POINT, y, this.ctx);
@@ -52,7 +53,8 @@ export default class {
   }
 
   getDirection(x1, y1) {
-    this.direction = this.control.direction || this.direction;
+    this.direction = this.control.direction;
+    console.log(this.control.direction);
     let x,
       y;
     switch (this.direction) {
