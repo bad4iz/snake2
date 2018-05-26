@@ -1,4 +1,4 @@
-/* eslint-disable one-var */
+/* eslint-disable one-var,class-methods-use-this */
 import Point from './Point';
 import Conf from './conf';
 
@@ -16,17 +16,40 @@ export default class {
     this.ctx = ctx;
     // инициализация тела змеи
     for (i = 0; i < this.length; i += 1) {
-      const point = new Point(((i * conf.POINT) + x), y, this.ctx);
-      console.log(((i * conf.POINT) + conf.START_SNAKE_X), y);
+      const point = new Point((x - i) * conf.POINT, y, this.ctx);
       this.snake.push(point);
     }
   }
 
   /**
    * прорисовка тела
-   * @param graphics
    */
   paint() {
     this.snake.forEach(point => point.paint());
+  }
+
+  /**
+   * шаг змеи
+   * @param graphics
+   */
+  move() {
+    // получаем голову
+    let x = this.snake[0].x;
+    let y = this.snake[0].y;
+
+    [x, y] = this.getDirection(x, y); // деструктивное присваивание координат следующего шага
+
+    // todo: проверка на конец игры
+    // todo: проверка на еду
+    this.snake.unshift(new Point(x, y, this.ctx));
+    this.snake.pop();
+    console.log(this.snake);
+    this.paint();
+  }
+
+  getDirection(x1, y1) {
+    const x = x1 + conf.POINT;
+    const y = y1 + 0;
+    return [x, y];
   }
 }
