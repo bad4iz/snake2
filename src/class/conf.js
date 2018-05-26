@@ -1,6 +1,6 @@
 export default class {
   constructor() {
-    this.POINT = 10;
+    this.POINT = 60;
     this.FIELD_WIDTH = Math.floor(document.documentElement.clientWidth / this.POINT);
     this.FIELD_HEIGHT = Math.floor(document.documentElement.clientHeight / this.POINT);
     this.DEFAULT_COLOR = '#222';

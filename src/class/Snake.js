@@ -12,6 +12,7 @@ export default class {
     const y = conf.START_SNAKE_Y;
     this.length = conf.START_SNAKE_SIZE;
     this.width = conf.FIELD_WIDTH * conf.POINT;
+    this.heigth = conf.FIELD_HEIGHT * conf.POINT;
     this.length = conf.START_SNAKE_SIZE;
     this.snake = [];
     this.direction = conf.START_DIRECTION;
@@ -58,31 +59,37 @@ export default class {
       case conf.directions[0]:
         x = x1;
         y = y1 - conf.POINT;
-        console.log('вверх', x, y);
+        // console.log('вверх', x, y);
         break;
       case conf.directions[1]:
         x = x1 + conf.POINT;
         y = y1;
-        console.log('право', x, y);
+        // console.log('право', x, y);
         break;
       case conf.directions[2]:
         x = x1;
         y = y1 + conf.POINT;
-        console.log('вниз', x, y);
+        // console.log('вниз', x, y);
         break;
       case conf.directions[3]:
         x = x1 - conf.POINT;
         y = y1;
-        console.log('влево', x, y);
+        // console.log('влево', x, y);
         break;
     }
 
 
-    if (x > this.width) {
+    if (x + conf.POINT > this.width) {
       x = 0;
     }
-    if (y > this.width) {
+    if (x < 0) {
+      x = this.width - conf.POINT;
+    }
+    if (y + conf.POINT > this.heigth) {
       y = 0;
+    }
+    if (y < 0) {
+      y = this.heigth - conf.POINT;
     }
     // const y = y1 + 0;
     return [x, y];
