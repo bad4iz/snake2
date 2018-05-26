@@ -22,12 +22,12 @@
     mounted() {
       document.addEventListener('DOMContentLoaded', () => {
         const canvas = new Canvas();
-        const control = new Mouse(canvas.canvasElement);
-        const direct = direction(control);
+        // const control = new Mouse(canvas.canvasElement);
+        // const direct = direction(control);
         const conf = new Conf();
 
 
-        const snake = new Snake(canvas.context);
+        const snake = new Snake(canvas);
         snake.paint();
 
         let i = 1;

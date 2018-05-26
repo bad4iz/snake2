@@ -1,11 +1,12 @@
-/* eslint-disable one-var,class-methods-use-this */
+/* eslint-disable one-var,class-methods-use-this,default-case */
 import Point from './Point';
 import Conf from './conf';
+import Mouse from './Mouse';
 
 const conf = new Conf();
 
 export default class {
-  constructor(ctx) {
+  constructor(canvas) {
     let i;
     const x = conf.START_SNAKE_X;
     const y = conf.START_SNAKE_Y;
@@ -15,7 +16,8 @@ export default class {
     this.snake = [];
     this.direction = conf.START_DIRECTION;
     this.graphics = {};
-    this.ctx = ctx;
+    this.ctx = canvas.context;
+    this.control = new Mouse(canvas.canvasElement);
     // инициализация тела змеи
     for (i = 0; i < this.length; i += 1) {
       const point = new Point((x - i) * conf.POINT, y, this.ctx);
@@ -49,13 +51,40 @@ export default class {
   }
 
   getDirection(x1, y1) {
-    let x;
-    if (x1 > this.width) {
-      x = 0;
-    } else {
-      x = x1 + conf.POINT;
+    this.direction = this.control.direction || this.direction;
+    let x,
+      y;
+    switch (this.direction) {
+      case conf.directions[0]:
+        x = x1;
+        y = y1 - conf.POINT;
+        console.log('вверх', x, y);
+        break;
+      case conf.directions[1]:
+        x = x1 + conf.POINT;
+        y = y1;
+        console.log('право', x, y);
+        break;
+      case conf.directions[2]:
+        x = x1;
+        y = y1 + conf.POINT;
+        console.log('вниз', x, y);
+        break;
+      case conf.directions[3]:
+        x = x1 - conf.POINT;
+        y = y1;
+        console.log('влево', x, y);
+        break;
     }
-    const y = y1 + 0;
+
+
+    if (x > this.width) {
+      x = 0;
+    }
+    if (y > this.width) {
+      y = 0;
+    }
+    // const y = y1 + 0;
     return [x, y];
   }
 }

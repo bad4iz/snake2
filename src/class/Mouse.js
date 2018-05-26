@@ -6,7 +6,7 @@ export default class {
   constructor(canvas) {
     this.x = 0;
     this.y = 0;
-    this.direction = conf.directions[2];
+    this.direction = conf.directions[1];
 
     canvas.addEventListener('mousemove', (event) => {
       const deltaX = Math.round((event.clientX - this.x) / conf.CONTROL_SENSITIVITY);
