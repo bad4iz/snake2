@@ -62,7 +62,6 @@ export default class {
       this.food.x = Math.round(Math.random() * this.width);
       this.food.y = Math.round(Math.random() * this.heigth);
       // console.log(this.food.x, this.food.y);
-      this.snake.pop();
     } else {
       this.snake.pop();
     }

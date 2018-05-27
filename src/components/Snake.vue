@@ -39,11 +39,13 @@
               canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
               snake.move();
               // if (!(snake.length % 30)) {
-              if (snake.length === 15 && !change) {
+              if (!change && !snake.length%10) {
                 change = true;
-                conf.POINT -= 10;
-                speed -= 10;
+                conf.POINT -= 1;
+                speed -= 1;
                 snake.rePaint();
+              } else {
+                change = false;
               }
               i = 1;
             } else {
