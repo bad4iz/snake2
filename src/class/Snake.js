@@ -1,8 +1,9 @@
-/* eslint-disable one-var,class-methods-use-this,default-case,no-unused-vars */
+/* eslint-disable one-var,class-methods-use-this,default-case,no-unused-vars,max-len */
 import Point from './Point';
 import Conf from './conf';
 import Mouse from './Mouse';
 import Swipe from './Swipe';
+import Food from './Food';
 
 const conf = new Conf();
 
@@ -20,11 +21,13 @@ export default class {
     this.graphics = {};
     this.ctx = canvas.context;
     this.control = new Swipe(canvas.canvasElement);
+    this.GAME_OVER = false;
     // инициализация тела змеи
     for (i = 0; i < this.length; i += 1) {
-      const point = new Point((x - i) * conf.POINT, y, this.ctx);
+      const point = new Point((x - i) * conf.POINT, y * conf.POINT, this.ctx);
       this.snake.push(point);
     }
+    this.food = new Food(5 * conf.POINT, 2 * conf.POINT, canvas.context);
   }
 
   /**
@@ -32,6 +35,7 @@ export default class {
    */
   paint() {
     this.snake.forEach(point => point.paint());
+    if (this.food) this.food.paint();
   }
 
   /**
@@ -46,15 +50,24 @@ export default class {
     [x, y] = this.getDirection(x, y); // деструктивное присваивание координат следующего шага
 
     // todo: проверка на конец игры
-    // todo: проверка на еду
+    const im = this.snake.filter(item => item.x === x && item.y === y);
+    if (im.length) {
+      this.GAME_OVER = true;
+    }
+    // todo: проверка на вставку еды не в тело
+    if (this.food && this.food.x === x && this.food.y === y) {
+      this.food.x = Math.abs(Math.round((Math.random() * (this.width / conf.POINT)) - 1) * conf.POINT);
+      this.food.y = Math.abs(Math.round((Math.random() * (this.heigth / conf.POINT)) - 1) * conf.POINT);
+      // console.log(this.food.x, this.food.y);
+    } else {
+      this.snake.pop();
+    }
     this.snake.unshift(new Point(x, y, this.ctx));
-    this.snake.pop();
     this.paint();
   }
 
   getDirection(x1, y1) {
     this.direction = this.control.direction;
-    console.log(this.control.direction);
     let x,
       y;
     switch (this.direction) {

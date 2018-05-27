@@ -27,16 +27,22 @@
         const conf = new Conf();
 
 
-        const snake = new Snake(canvas);
+        let snake = new Snake(canvas);
         snake.paint();
 
         let i = 1;
         function move() {
           window.requestAnimationFrame(move);
           if (!(i % 30)) {
-            canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
-            snake.move();
-            i = 1;
+            if (!snake.GAME_OVER) {
+              canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
+              snake.move();
+              i = 1;
+            } else {
+              snake = null;
+              snake = new Snake(canvas);
+              snake.paint();
+            }
           }
           i +=1;
         }

@@ -7,9 +7,10 @@ export default class {
     this.FOOD_COLOR = '#090';
     this.POISON_COLOR = '#900';
     this.CONTROL_SENSITIVITY = 3; // чуствительность управления
-    this.START_SNAKE_SIZE = 6;
+    this.START_SNAKE_SIZE = 15;
     this.START_SNAKE_X = 20;
     this.START_SNAKE_Y = 20;
+    this.GAME_OVER = false;
     this.directions = [
       'UP',
       'RIGHT',
