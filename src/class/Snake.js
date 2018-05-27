@@ -1,10 +1,12 @@
-/* eslint-disable one-var,class-methods-use-this,default-case,no-unused-vars,max-len */
+/* eslint-disable one-var,class-methods-use-this,default-case,no-unused-vars,max-len,prefer-const */
 import Point from './Point';
 import conf from './conf';
 import Mouse from './Mouse';
 import Swipe from './Swipe';
 import Food from './Food';
 
+const width = () => Math.floor(document.documentElement.clientWidth / conf.POINT),
+  heigth = () => Math.floor(document.documentElement.clientHeight / conf.POINT);
 
 export default class {
   constructor(canvas) {
@@ -12,8 +14,6 @@ export default class {
     const x = conf.START_SNAKE_X;
     const y = conf.START_SNAKE_Y;
     this.length = conf.START_SNAKE_SIZE;
-    this.width = Math.floor(document.documentElement.clientWidth / conf.POINT);
-    this.heigth = Math.floor(document.documentElement.clientHeight / conf.POINT);
     this.length = conf.START_SNAKE_SIZE;
     this.direction = conf.START_DIRECTION;
     this.graphics = {};
@@ -59,8 +59,8 @@ export default class {
 
     if (this.food && this.food.x === x && this.food.y === y) {
       this.length += 1;
-      this.food.x = Math.round(Math.random() * (this.width - 1));
-      this.food.y = Math.round(Math.random() * (this.heigth - 1));
+      this.food.x = Math.round(Math.random() * (width() - 1));
+      this.food.y = Math.round(Math.random() * (heigth() - 1));
       // console.log(this.food.x, this.food.y);
     } else {
       this.snake.pop();
@@ -97,17 +97,17 @@ export default class {
     }
 
 
-    if (x + 1 > this.width) {
+    if (x + 1 > width()) {
       x = 0;
     }
     if (x < 0) {
-      x = this.width - 1;
+      x = width() - 1;
     }
-    if (y + 1 > this.heigth) {
+    if (y + 1 > heigth()) {
       y = 0;
     }
     if (y < 0) {
-      y = this.heigth - 1;
+      y = heigth() - 1;
     }
     // const y = y1 + 0;
     return [x, y];
@@ -120,7 +120,7 @@ export default class {
     //   const point = new Point((x - i) * conf.POINT, y * conf.POINT, this.ctx);
     //   this.snake.push(point);
     // }
-    //   this.food.x = Math.abs(Math.round((Math.random() * (this.width / conf.POINT)) - 1) * conf.POINT);
-    //   this.food.y = Math.abs(Math.round((Math.random() * (this.heigth / conf.POINT)) - 1) * conf.POINT);
+    //   this.food.x = Math.abs(Math.round((Math.random() * (width() / conf.POINT)) - 1) * conf.POINT);
+    //   this.food.y = Math.abs(Math.round((Math.random() * (this.heigth() / conf.POINT)) - 1) * conf.POINT);
   }
 }

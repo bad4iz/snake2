@@ -39,12 +39,17 @@
               canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
               snake.move();
               // if (!(snake.length % 30)) {
-              if (!change && !snake.length%10) {
+              canvas.context.beginPath();
+              canvas.context.fillStyle = 'blue';
+              canvas.context.font = '50px Arial';
+              canvas.context.fillText(snake.length, 100, 100);
+              if (!change && snake.length % 5 === 0) {
+                console.log('aaaaaa');
                 change = true;
-                conf.POINT -= 1;
-                speed -= 1;
+                conf.POINT -= 10;
+                speed -= 3;
                 snake.rePaint();
-              } else {
+              } else if (snake.length % 5 !== 0) {
                 change = false;
               }
               i = 1;
