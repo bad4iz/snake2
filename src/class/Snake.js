@@ -22,7 +22,7 @@ export default class {
     this.GAME_OVER = false;
     // инициализация тела змеи
     this.snake = [];
-    for (i = 0; i < this.length - 1; i += 1) {
+    for (i = 0; i < this.length; i += 1) {
       this.snake.push({ x: x - i, y, d: 1 });
     }
     this.food = new Food(9, 0, canvas.context);
@@ -98,17 +98,17 @@ export default class {
     }
 
 
-    if (x > this.width) {
+    if (x + 1 > this.width) {
       x = 0;
     }
     if (x < 0) {
-      x = this.width;
+      x = this.width - 1;
     }
-    if (y > this.heigth) {
+    if (y + 1 > this.heigth) {
       y = 0;
     }
     if (y < 0) {
-      y = this.heigth;
+      y = this.heigth - 1;
     }
     // const y = y1 + 0;
     return [x, y];

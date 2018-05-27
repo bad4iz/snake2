@@ -22,7 +22,7 @@ export default class Point {
     this.ctx.fillRect(this.x * conf.POINT, this.y * conf.POINT, this.x + conf.POINT, this.y + conf.POINT);
     this.ctx.fillStyle = 'white';
     this.ctx.font = '10px Arial';
-    this.ctx.fillText(this.number, this.x + (conf.POINT / 2), this.y + (conf.POINT / 2));
+    this.ctx.fillText(this.number, this.x * conf.POINT, this.y * conf.POINT);
     this.ctx.fillStyle = this.color;
   }
   get number() {
