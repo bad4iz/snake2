@@ -1,6 +1,4 @@
-import Conf from './conf';
-
-const conf = new Conf();
+import conf from './conf';
 
 export default class {
   constructor(canvas) {

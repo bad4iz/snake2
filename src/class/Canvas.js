@@ -1,9 +1,7 @@
-import Conf from './conf';
+import conf from './conf';
 /**
  * холст
  */
-const conf = new Conf();
-
 
 export default class Canvas {
   constructor() {

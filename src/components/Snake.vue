@@ -11,7 +11,7 @@
   import Canvas from '../class/Canvas';
   import Point from '../class/Point';
   import Snake from '../class/Snake';
-  import Conf from '../class/conf';
+  import conf from '../class/conf';
 
   export default {
     created() {
@@ -24,28 +24,39 @@
         const canvas = new Canvas();
         // const control = new Mouse(canvas.canvasElement);
         // const direct = direction(control);
-        const conf = new Conf();
-
 
         let snake = new Snake(canvas);
         snake.paint();
 
         let i = 1;
+        let speed = 30;
+        let change = false;
+
         function move() {
           window.requestAnimationFrame(move);
-          if (!(i % 30)) {
+          if (!(i % speed)) {
             if (!snake.GAME_OVER) {
               canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
               snake.move();
+              // if (!(snake.length % 30)) {
+              if (snake.length === 15 && !change) {
+                change = true;
+                conf.POINT -= 10;
+                speed -= 10;
+                snake.rePaint();
+              }
               i = 1;
             } else {
+              conf.POINT = 60;
+              speed = 30;
               snake = null;
               snake = new Snake(canvas);
               snake.paint();
             }
           }
-          i +=1;
+          i += 1;
         }
+
         move();
       });
     },

@@ -1,7 +1,5 @@
 /* eslint-disable no-undef,no-unused-vars */
-import Conf from './conf';
-
-const conf = new Conf();
+import conf from './conf';
 
 export default class {
   constructor(canvasElement) {

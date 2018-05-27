@@ -1,7 +1,6 @@
 import Point from './Point';
-import Conf from './conf';
+import conf from './conf';
 
-const conf = new Conf();
 
 export default class Food extends Point {
   constructor(x, y, ctx) {
