@@ -1,7 +1,5 @@
 /* eslint-disable no-undef,no-unused-vars */
-import Conf from './conf';
-
-const conf = new Conf();
+import conf from './conf';
 
 export default class {
   constructor(canvasElement) {
@@ -27,21 +25,29 @@ export default class {
       const xy = Math.abs(x / y);
       const yx = Math.abs(y / x);
       // if (Math.abs(x) > this.treshold || Math.abs(y) > this.treshold) {
-      if (Math.round(x / 100) < 0) {
-        this.direction = conf.directions[3];
+      if (Math.round(x / conf.CONTROL_SENSITIVITY) < 0) {
+        if (this.direction !== conf.directions[1]) {
+          this.direction = conf.directions[3];
+        }
         // console.log('left', this.direction);
       }
-      if (Math.round(x / 100) > 0) {
-        this.direction = conf.directions[1];
+      if (Math.round(x / conf.CONTROL_SENSITIVITY) > 0) {
+        if (this.direction !== conf.directions[3]) {
+          this.direction = conf.directions[1];
+        }
         // console.log('right');
       }
-      if (Math.round(y / 100) < 0) {
-        this.direction = conf.directions[0];
+      if (Math.round(y / conf.CONTROL_SENSITIVITY) < 0) {
+        if (this.direction !== conf.directions[2]) {
+          this.direction = conf.directions[0];
+        }
         // console.log('top');
       }
-      if (Math.round(y / 100) > 0) {
-        this.direction = conf.directions[2];
-        // console.log('bottom');
+      if (Math.round(y / conf.CONTROL_SENSITIVITY) > 0) {
+        if (this.direction !== conf.directions[0]) {
+          this.direction = conf.directions[2];
+          console.log('bottom');
+        }
       }
       // } else {
       //   console.log('tap');
