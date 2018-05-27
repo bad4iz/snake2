@@ -6,7 +6,7 @@ export default {
   DEFAULT_COLOR: '#222',
   FOOD_COLOR: '#090',
   POISON_COLOR: '#900',
-  CONTROL_SENSITIVITY: 3, // чуствительность управления
+  CONTROL_SENSITIVITY: 200, // чуствительность управления
   START_SNAKE_SIZE: 2,
   START_SNAKE_X: 6,
   START_SNAKE_Y: 0,
