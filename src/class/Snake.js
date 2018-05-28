@@ -25,7 +25,7 @@ export default class {
     for (i = 0; i < this.length; i += 1) {
       this.snake.push({ x: x - i, y, d: 1 });
     }
-    this.food = new Food(9, 0, canvas.context);
+    this.food = new Food(2, 2, canvas.context);
   }
 
   /**
