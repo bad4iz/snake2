@@ -2,7 +2,7 @@
 import Point from './Point';
 import conf from './conf';
 import Mouse from './Mouse';
-import Swipe from './Swipe';
+import Swipe from './Keydown';
 import Food from './Food';
 
 const width = () => Math.floor(document.documentElement.clientWidth / conf.POINT),
