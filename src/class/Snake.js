@@ -23,9 +23,9 @@ export default class {
     // инициализация тела змеи
     this.snake = [];
     for (i = 0; i < this.length; i += 1) {
-      this.snake.push({ x: x - i, y, d: 1 });
+      this.snake.push({ x: x - i, y });
     }
-    this.food = new Food(0, 0, canvas.context);
+    this.food = new Food(1, 3, canvas.context);
   }
 
   /**
@@ -34,7 +34,7 @@ export default class {
   paint() {
     this.snake.forEach((item) => {
       const point = new Point(item.x, item.y, this.ctx);
-      // point.paint();
+      point.paint();
       // console.log(point.x, point.y);
     });
     if (this.food) this.food.paint();

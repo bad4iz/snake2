@@ -19,8 +19,7 @@ export default class Point {
   paint() {
     this.ctx.beginPath();
     this.ctx.fillStyle = this.color;
-    this.ctx.fillRect(this.x * conf.POINT, this.y * conf.POINT, (this.x * conf.POINT) + conf.POINT, this.y * conf.POINT);
-    console.log(this.y);
+    this.ctx.fillRect(this.x * conf.POINT, this.y * conf.POINT, (this.x * conf.POINT) + conf.POINT, (this.y * conf.POINT) + conf.POINT);
     this.ctx.fillStyle = 'white';
     this.ctx.font = '10px Arial';
     this.ctx.fillText(this.number, this.x * conf.POINT, this.y * conf.POINT);
