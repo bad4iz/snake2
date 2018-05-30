@@ -5,7 +5,7 @@
 </template>
 <script>
   // eslint-disable-next-line max-len
-  /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case,space-infix-ops,no-unused-vars,no-new */
+  /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case,space-infix-ops,no-unused-vars,no-new,max-len,no-shadow */
   import direction from '../class/Direction';
   import Mouse from '../class/Mouse';
   import Canvas from '../class/Canvas';
@@ -31,10 +31,23 @@
         let i = 1;
         let speed = 30;
         let change = false;
+        let fps = 1;
+        let now;
+        let then;
+        let delta;
 
-        function move() {
+        function move(now) {
+          const interval = 1000 / fps;
+          if (!then) {
+            then = now;
+          }
           window.requestAnimationFrame(move);
-          if (!(i % speed)) {
+          delta = now - then;
+          if (delta > interval) {
+            then = now - (delta % interval);
+
+            // ... Code for Drawing the Frame ...
+            // if (!(i % speed)) {
             if (!snake.GAME_OVER) {
               canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
               snake.move();
@@ -44,24 +57,24 @@
               canvas.context.font = '50px Arial';
               canvas.context.fillText(snake.length, 100, 100);
               if (!change && snake.length % 5 === 0) {
-                console.log('aaaaaa');
                 change = true;
-                conf.POINT -= 10;
-                speed -= 3;
+                conf.POINT -= 2;
+                fps += 0.5;
                 snake.rePaint();
               } else if (snake.length % 5 !== 0) {
                 change = false;
               }
               i = 1;
-            } else {
-              // conf.POINT = 60;
-              // speed = 30;
-              // snake = null;
-              // snake = new Snake(canvas);
-              // snake.paint();
+              // } else {
+              //   // conf.POINT = 60;
+              //   // speed = 30;
+              //   // snake = null;
+              //   // snake = new Snake(canvas);
+              //   // snake.paint();
+              // }
             }
+            i += 1;
           }
-          i += 1;
         }
 
         move();
