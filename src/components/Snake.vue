@@ -46,7 +46,6 @@
           if (delta > interval) {
             then = now - (delta % interval);
 
-            // ... Code for Drawing the Frame ...
             // if (!(i % speed)) {
             if (!snake.GAME_OVER) {
               canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
