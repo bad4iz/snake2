@@ -46,11 +46,9 @@
           if (delta > interval) {
             then = now - (delta % interval);
 
-            // if (!(i % speed)) {
             if (!snake.GAME_OVER) {
               canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
               snake.move();
-              // if (!(snake.length % 30)) {
               canvas.context.beginPath();
               canvas.context.fillStyle = 'blue';
               canvas.context.font = '50px Arial';

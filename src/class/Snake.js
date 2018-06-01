@@ -59,8 +59,10 @@ export default class {
 
     if (this.food && this.food.x === x && this.food.y === y) {
       this.length += 1;
-      this.food.x = Math.round(Math.random() * (width() - 1));
-      this.food.y = Math.round(Math.random() * (heigth() - 1));
+      do {
+        this.food.x = Math.round(Math.random() * (width() - 1));
+        this.food.y = Math.round(Math.random() * (heigth() - 1));
+      } while (this.food && this.food.x === x && this.food.y === y);
       // console.log(this.food.x, this.food.y);
     } else {
       this.snake.pop();
