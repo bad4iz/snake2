@@ -9,7 +9,7 @@ export default {
   CONTROL_SENSITIVITY: 200, // чуствительность управления
   START_SNAKE_SIZE: 2,
   START_SNAKE_X: 6,
-  START_SNAKE_Y: 2,
+  START_SNAKE_Y: 3,
   GAME_OVER: false,
   directions: [
     'UP',
