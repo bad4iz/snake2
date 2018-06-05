@@ -50,12 +50,11 @@ export default class {
     let y = this.snake[0].y;
     [x, y] = this.getDirection(x, y); // деструктивное присваивание координат следующего шага
 
-    // todo: проверка на конец игры
+    // проверка на конец игры
     const im = this.snake.filter(item => item.x === x && item.y === y);
     if (im.length) {
       this.GAME_OVER = true;
     }
-    // todo: проверка на вставку еды не в тело
 
     if (this.food && this.food.x === x && this.food.y === y) {
       this.length += 1;
@@ -63,7 +62,6 @@ export default class {
         this.food.x = Math.round(Math.random() * (width() - 1));
         this.food.y = Math.round(Math.random() * (heigth() - 1));
       } while (this.food && this.food.x === x && this.food.y === y);
-      // console.log(this.food.x, this.food.y);
     } else {
       this.snake.pop();
     }
