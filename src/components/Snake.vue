@@ -62,16 +62,15 @@
                 change = false;
               }
               i = 1;
-              } else {
-                conf.POINT = 60;
-                speed = 30;
-                snake = null;
-                snake = new Snake(canvas);
-                snake.paint();
-              }
+            } else {
+              conf.POINT = 60;
+              speed = 30;
+              snake = null;
+              snake = new Snake(canvas);
+              snake.paint();
             }
-            i += 1;
           }
+          i += 1;
         }
 
         move();

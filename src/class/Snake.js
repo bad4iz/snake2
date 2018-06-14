@@ -37,12 +37,13 @@ export default class {
       point.paint();
       // console.log(point.x, point.y);
     });
-    if (this.food) this.food.paint();
+    if (this.food) {
+      this.food.paint();
+    }
   }
 
   /**
    * шаг змеи
-   * @param graphics
    */
   move() {
     // получаем голову
