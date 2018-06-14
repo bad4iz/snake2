@@ -1,12 +1,14 @@
 <template>
-  <v-container id="snake">
+  <div>
 
-  </v-container>
+    <v-container id="snake">
+
+    </v-container>
+  </div>
 </template>
 <script>
   // eslint-disable-next-line max-len
   /* eslint-disable no-use-before-define,no-param-reassign,consistent-return,no-underscore-dangle,class-methods-use-this,prefer-const,one-var,default-case,space-infix-ops,no-unused-vars,no-new,max-len,no-shadow */
-  import direction from '../class/Direction';
   import Mouse from '../class/Mouse';
   import Canvas from '../class/Canvas';
   import Point from '../class/Point';
@@ -14,6 +16,7 @@
   import conf from '../class/conf';
 
   export default {
+    // todo: сделать селект выбора контрола управления
     created() {
       const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -23,13 +26,11 @@
       document.addEventListener('DOMContentLoaded', () => {
         const canvas = new Canvas();
         // const control = new Mouse(canvas.canvasElement);
-        // const direct = direction(control);
 
-        let snake = new Snake(canvas);
+        let snake = new Snake(canvas, 'Keydown');
         snake.paint();
 
         let i = 1;
-        let speed = 30;
         let change = false;
         let fps = 1;
         let now;
@@ -64,7 +65,7 @@
               i = 1;
             } else {
               conf.POINT = 60;
-              speed = 30;
+              fps = 1;
               snake = null;
               snake = new Snake(canvas);
               snake.paint();

@@ -1,15 +1,16 @@
-/* eslint-disable one-var,class-methods-use-this,default-case,no-unused-vars,max-len,prefer-const */
+/* eslint-disable one-var,class-methods-use-this,default-case,no-unused-vars,max-len,prefer-const,new-cap */
 import Point from './Point';
 import conf from './conf';
 import Mouse from './Mouse';
 import Swipe from './Keydown';
 import Food from './Food';
+import factoryControl from './FactoryControl';
 
 const width = () => Math.floor(document.documentElement.clientWidth / conf.POINT),
   heigth = () => Math.floor(document.documentElement.clientHeight / conf.POINT);
 
 export default class {
-  constructor(canvas) {
+  constructor(canvas, cont) {
     let i;
     const x = conf.START_SNAKE_X;
     const y = conf.START_SNAKE_Y;
@@ -18,7 +19,8 @@ export default class {
     this.direction = conf.START_DIRECTION;
     this.graphics = {};
     this.ctx = canvas.context;
-    this.control = new Swipe(canvas.canvasElement);
+    const controlDirection = factoryControl(cont);
+    this.control = new controlDirection(canvas.canvasElement);
     this.GAME_OVER = false;
     // инициализация тела змеи
     this.snake = [];
