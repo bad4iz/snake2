@@ -6,7 +6,8 @@ import 'vuetify/dist/vuetify.css';
 import VueCordova from 'vue-cordova';
 import VueHead from 'vue-head';
 
-import App from './components/Snake';
+// import App from './components/Snake';
+import App from './App';
 // import router from './router';
 
 Vue.use(Vuetify);

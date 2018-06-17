@@ -1,5 +1,15 @@
 <template>
   <div>
+    <v-container v-if="!control" fluid>
+      <v-select
+        :items="items"
+        v-model="control"
+        label="Выберите управление змейкой"
+        class="input-group--focused"
+        item-value="text"
+        return-object
+      ></v-select>
+    </v-container>
 
     <v-container id="snake">
 
@@ -16,67 +26,89 @@
   import conf from '../class/conf';
 
   export default {
+    data() {
+      return {
+        control: null,
+        items: [
+          { text: 'стрелками клавиатуры', value: 'Keydown' },
+          { text: 'свайпом', value: 'Swipe' },
+          { text: 'мышью', value: 'Mouse' },
+        ],
+        i: 1,
+        change: false,
+        fps: 1,
+        now: null,
+        then: null,
+        delta: null,
+        snake: null,
+        canvas: null,
+      };
+    },
     // todo: сделать селект выбора контрола управления
     created() {
       const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
       window.requestAnimationFrame = requestAnimationFrame;
     },
-    mounted() {
-      document.addEventListener('DOMContentLoaded', () => {
-        const canvas = new Canvas();
+    watch: {
+      control(val) {
+        this.canvas = new Canvas();
         // const control = new Mouse(canvas.canvasElement);
 
-        let snake = new Snake(canvas, 'Keydown');
-        snake.paint();
+        this.snake = new Snake(this.canvas, val.value);
+        this.snake.paint();
+        this.move();
+      },
+    },
+    mounted() {
+      // const canvas = new Canvas();
+      // // const control = new Mouse(canvas.canvasElement);
+      //
+      // let snake = new Snake(canvas, 'Keydown');
+      // snake.paint();
 
-        let i = 1;
-        let change = false;
-        let fps = 1;
-        let now;
-        let then;
-        let delta;
 
-        function move(now) {
-          const interval = 1000 / fps;
-          if (!then) {
-            then = now;
-          }
-          window.requestAnimationFrame(move);
-          delta = now - then;
-          if (delta > interval) {
-            then = now - (delta % interval);
-
-            if (!snake.GAME_OVER) {
-              canvas.context.clearRect(0, 0, canvas.canvasElement.width, canvas.canvasElement.height);
-              snake.move();
-              canvas.context.beginPath();
-              canvas.context.fillStyle = 'blue';
-              canvas.context.font = '50px Arial';
-              canvas.context.fillText(snake.length, 100, 100);
-              if (!change && snake.length % 5 === 0) {
-                change = true;
-                conf.POINT -= 2;
-                fps += 0.5;
-                snake.rePaint();
-              } else if (snake.length % 5 !== 0) {
-                change = false;
-              }
-              i = 1;
-            } else {
-              conf.POINT = 60;
-              fps = 1;
-              snake = null;
-              snake = new Snake(canvas);
-              snake.paint();
-            }
-          }
-          i += 1;
-        }
-
-        move();
+      document.addEventListener('DOMContentLoaded', () => {
+        // move();
       });
     },
-    methods: {},
+    methods: {
+      move(now) {
+        const interval = 1000 / this.fps;
+        if (!this.then) {
+          this.then = now;
+        }
+        window.requestAnimationFrame(this.move);
+        this.delta = now - this.then;
+        if (this.delta > interval) {
+          this.then = now - (this.delta % interval);
+
+          if (!this.snake.GAME_OVER) {
+            this.canvas.context.clearRect(0, 0, this.canvas.canvasElement.width, this.canvas.canvasElement.height);
+            this.snake.move();
+            this.canvas.context.beginPath();
+            this.canvas.context.fillStyle = 'blue';
+            this.canvas.context.font = '50px Arial';
+            this.canvas.context.fillText(this.snake.length, 100, 100);
+            if (!this.change && this.snake.length % 5 === 0) {
+              this.change = true;
+              conf.POINT -= 2;
+              this.fps += 0.5;
+              this.snake.rePaint();
+            } else if (this.snake.length % 5 !== 0) {
+              this.change = false;
+            }
+            this.i = 1;
+          } else {
+            conf.POINT = 60;
+            this.fps = 1;
+            this.snake = null;
+            this.snake = new Snake(this.canvas);
+            this.snake.paint();
+          }
+        }
+        this.i += 1;
+      },
+    },
   };
 </script>
